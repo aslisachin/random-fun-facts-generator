@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <style>
+        body {
+            max-width: 500px;
+            background-color: #4d4d52;
+            margin: auto;
+            background-image: url('bg.png');
+        }
+
+        .container {
+            display: block;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 10px;
+            box-shadow: 10px 8px 0px rgb(191 219 254);
+            background: #e8eff5;
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Ubuntu', sans-serif;
+            color: rgb(29, 28, 28);
+            max-width: 80%;
+        }
+
+        .avatar {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            box-shadow: 7px 7px 15px #bbcfda, -4px -4px 13px #fff, inset 4px 4px 8px rgba(209, 217, 230, 0.2), inset -8px -8px 8px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        h1.name {
+            color: rgb(60, 116, 186);
+            text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
+        }
+
+        hr {
+            border: 0;
+            height: 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .link {
+            width: 80%;
+            text-decoration: none;
+            color: black;
+            background-color: rgb(191 219 254);
+            display: block;
+            margin: auto;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 25px;
+            box-shadow: 0px 1px 0px 0px rgba(9, 30, 66, .25);
+            transition: box-shadow 0.9s ease-in-out;
+        }
+
+        .link:hover {
+            box-shadow: 0px 13px 27px -5px rgba(50, 50, 93, 0.25), 0px 8px 16px -8px rgba(0, 0, 0, 0.3), 0px -6px 16px -6px rgba(0, 0, 0, 0.025);
+        }
+        #the-quote{
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="name">Random Fun Fact Generator</h1>
+        <hr />
+        <div id="quote-block">
+            <div id="the-quote"></div>
+            <br/>
+            <div id="quote-cat"></div>
+            <br/>
+            <div class="link btn">New Fact</div>
+        </div>
+
+
+    </div>
+
+    <div class="container">&copy; AsliSachin</div>
+
+    <script>
+        $(document).ready(function () {
+
+            $(".btn").on("click", function () {
+              // Free To Use API (But Ask For Permission Before Using on Any Big Projects)
+                $.getJSON("https://tools.apgy.in/api/fun-facts/", function (json) {
+                    $("#quote-cat").fadeOut("slow");
+                    $('#the-quote').fadeOut('slow', function () {
+                        $('#the-quote').html(json.data.fact);
+                        $('#quote-cat').html("Category: "+json.data.cat);
+                        $("#the-quote").fadeIn("slow");
+                        $("#quote-cat").fadeIn("slow");
+                    });
+
+                });
+            });
+
+            $('.btn').trigger('click');
+
+        });
+    </script>
+</body>
+
+</html>
