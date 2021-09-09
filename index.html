@@ -99,7 +99,7 @@
 
             $(".btn").on("click", function () {
               // Free To Use API (But Ask For Permission Before Using on Any Big Projects)
-                $.getJSON("https://tools.apgy.in/api/fun-facts/", function (json) {
+                $.getJSON("https://asli-fun-fact-api.herokuapp.com", function (json) {
                     $("#quote-cat").fadeOut("slow");
                     $('#the-quote').fadeOut('slow', function () {
                         $('#the-quote').html(json.data.fact);
